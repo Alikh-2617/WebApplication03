@@ -1,0 +1,49 @@
+﻿@model LanguageVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Languagies</h1>
+<br />
+<br />
+<p>
+    <a class="btn btn-info" asp-action="Create">Create New Language</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Language ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Register Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var language in Model.Languages)
+        {
+            <tr>
+                <td>
+                    @language.Id
+                </td>
+                <td>
+                    @language.Name
+                </td>
+                <td>
+                    @language.Register
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@language.Id">Edit</a> |
+                    <a class="btn btn-info" asp-action="GetLanguage" asp-route-id="@language.Id">People with this language</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@language.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

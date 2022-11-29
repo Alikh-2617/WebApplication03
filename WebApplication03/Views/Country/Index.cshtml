@@ -1,0 +1,48 @@
+﻿@model CountryVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Countries</h1>
+<br />
+<br />
+<p>
+    <a class="btn btn-info" asp-action="Create">Create New Country</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Country ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Register Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var country in Model.Countries) {
+        <tr>
+                <td>
+                    @country.Id
+                </td>
+            <td>
+                @country.Name
+            </td>
+            <td>
+                @country.Register
+            </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@country.Id">Edit</a> |
+                    <a class="btn btn-info" asp-action="GetLanguage" asp-route-id="@country.Id">cities in this country</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@country.Id">Delete</a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

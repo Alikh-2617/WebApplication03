@@ -1,0 +1,63 @@
+﻿@model PersonVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>People</h1>
+<br />
+<br />
+@*    create Table for länk och search form*@
+
+<p>
+    <a class="btn btn-info" asp-action="Create">Create New Person </a>
+</p>
+
+@*<p align="right" >
+    <label>Write ID : </label>
+    <input type="text" id="id" name="id" />
+    <button onclick="GetDetails()" id="details" type="submit">Get Details</button>
+    <button class="btn btn-danger" onclick="Delete()" id="Delet" type="submit">Delete</button>
+</p>*@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Person ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                Register Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model.People)
+        {
+            <tr>
+                <td>@person.Id</td>
+                <td>@person.Name</td>
+                <td>@person.Age</td>
+                <td>@person.PhoneNumber</td>
+                <td>@person.Register</td>
+                <th>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@person.Id">Edit</a> |
+                    <a class="btn btn-info" asp-action="GetLanguage" asp-route-id="@person.Id">People with this language</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@person.Id">Delete</a>
+                </td>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
