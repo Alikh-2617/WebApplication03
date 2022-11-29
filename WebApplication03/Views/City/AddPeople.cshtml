@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Add People";
+}
+
+<h1>Add People to City</h1>
+<br />
+<h4>@ViewBag.Message</h4>
+<form asp-action="AddPeople" method="post">
+    <div class="form-group">
+@*        <input type="hidden" asp-for="cityId" />
+*@        <h4>Add Person to : @ViewBag.City </h4>
+    </div>
+    <div class="form-group">
+        <label>Person</label>
+        <select name="personId" class="form-control" asp-items="@ViewBag.People"></select>
+    </div>
+
+    <input type="submit" value="Add To City" class="btn btn-primary" />
+
+</form>

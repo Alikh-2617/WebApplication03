@@ -1,0 +1,57 @@
+﻿@model List<City>
+
+@{
+    ViewData["Title"] = "Status";
+}
+
+<h1>Status</h1>
+<br />
+<h4>@ViewBag.Message1</h4>
+<h6>@ViewBag.Message4</h6>
+@if (Model.Count() != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Citys Name
+                </th>
+                <th>
+                    PostNumber
+                </th>
+                <th>
+                    Register Date
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var city in Model)
+            {
+                <tr>
+                    <td>
+                        @city.Name
+                    </td>
+                    <td>
+                        @city.PostNumber
+                    </td>
+                    <td>
+                        @city.Register
+                    </td>
+                    <td>
+                        <a asp-action="DeleteCity" asp-route-cityid="@city.Id" asp-route-countryid="@ViewBag.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>@ViewBag.Message3 </h3>
+}
+<div>
+    <br />
+    <br />
+    <a class="btn btn-info" asp-action="Index">Back to Country List</a>
+</div>

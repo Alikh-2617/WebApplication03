@@ -1,0 +1,64 @@
+﻿@model List<Person>
+
+@{
+    ViewData["Title"] = "Status";
+}
+
+<h1>Status</h1>
+<br />
+<h4>@ViewBag.Message1</h4>
+<h6>@ViewBag.Message4</h6>
+
+@if(Model.Count() != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Age
+                </th>
+                <th>
+                    PhoneNumber
+                </th>
+                <th>
+                    Register
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in Model)
+            {
+                <tr>
+                    <td>
+                        @person.Name
+                    </td>
+                    <td>
+                        @person.Age
+                    </td>
+                    <td>
+                        @person.PhoneNumber
+                    </td>
+                    <td>
+                        @person.Register
+                    </td>
+                    <td>
+                        <a asp-action="DeletePerson" asp-route-personid="@person.Id" asp-route-languageid="@ViewBag.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>@ViewBag.Message3</h3>
+}
+<div>
+    <br />
+    <br />
+    <a class="btn btn-info" asp-action="Index">Back to Language List</a>
+</div>

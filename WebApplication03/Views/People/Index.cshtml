@@ -7,7 +7,6 @@
 <h1>People</h1>
 <br />
 <br />
-@*    create Table for länk och search form*@
 
 <p>
     <a class="btn btn-info" asp-action="Create">Create New Person </a>
@@ -23,9 +22,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Person ID
-            </th>
             <th>
                 Name
             </th>
@@ -45,7 +41,6 @@
         @foreach (var person in Model.People)
         {
             <tr>
-                <td>@person.Id</td>
                 <td>@person.Name</td>
                 <td>@person.Age</td>
                 <td>@person.PhoneNumber</td>
@@ -53,7 +48,7 @@
                 <th>
                 <td>
                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@person.Id">Edit</a> |
-                    <a class="btn btn-info" asp-action="GetLanguage" asp-route-id="@person.Id">People with this language</a> |
+                    <a class="btn btn-info" asp-action="FetchLanguage" asp-route-id="@person.Id">language he speak</a> |
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@person.Id">Delete</a>
                 </td>
                 </th>

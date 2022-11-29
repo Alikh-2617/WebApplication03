@@ -14,9 +14,6 @@
     <thead>
         <tr>
             <th>
-                Language ID
-            </th>
-            <th>
                 Name
             </th>
             <th>
@@ -30,9 +27,6 @@
         {
             <tr>
                 <td>
-                    @language.Id
-                </td>
-                <td>
                     @language.Name
                 </td>
                 <td>
@@ -40,7 +34,7 @@
                 </td>
                 <td>
                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@language.Id">Edit</a> |
-                    <a class="btn btn-info" asp-action="GetLanguage" asp-route-id="@language.Id">People with this language</a> |
+                    <a class="btn btn-info" asp-action="FetchPeople" asp-route-id="@language.Id">people with this language</a> |
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@language.Id">Delete</a>
                 </td>
             </tr>

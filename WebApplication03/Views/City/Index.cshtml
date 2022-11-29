@@ -14,9 +14,6 @@
     <thead>
         <tr>
             <th>
-                City ID
-            </th>
-            <th>
                 Name
             </th>
             <th>
@@ -31,9 +28,6 @@
     <tbody>
 @foreach (var city in Model.Cities) {
         <tr>
-                <td>
-                    @city.Id
-                </td>
             <td>
                 @city.Name
             </td>
@@ -45,7 +39,8 @@
             </td>
                 <td>
                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@city.Id">Edit</a> |
-                    <a class="btn btn-info" asp-action="GetLanguage" asp-route-id="@city.Id">people in this city</a> |
+                    <a class="btn btn-primary" asp-action="AddPeople" asp-route-id="@city.Id">Add people</a> |
+                    <a class="btn btn-info" asp-action="FetchPeople" asp-route-id="@city.Id">people in this city</a> |
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@city.Id">Delete</a>
                 </td>
         </tr>
