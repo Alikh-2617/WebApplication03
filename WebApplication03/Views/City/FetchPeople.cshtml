@@ -48,7 +48,7 @@
                         @person.Register
                     </td>
                     <td>
-                        <a asp-action="DeletePerson" asp-route-personid="@person.Id" asp-route-cityid="@ViewBag.Id">Delete</a>
+                        <a class="btn btn-danger" asp-action="DeletePerson" asp-route-personid="@person.Id" asp-route-cityid="@ViewBag.Id">Delete</a>
                     </td>
                 </tr>
             }

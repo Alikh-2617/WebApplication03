@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication03.Data;
 using WebApplication03.Models;
@@ -95,5 +96,36 @@ namespace WebApplication03.Controllers
             ViewBag.Message4 = "person deleted ! ";
             return View("FetchPeople", language.People);
         }
+
+        public IActionResult AddPeople(string id)
+        {
+            var language = _context.Languages.FirstOrDefault(x => x.Id == id);
+            ViewBag.Id = language.Id;
+            ViewBag.Language = language.Name;
+            ViewBag.People = new SelectList(_context.People, "Id", "Name");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddPeople(string personId, string languageId)
+        {
+            var language = _context.Languages.Include(x => x.People).FirstOrDefault(x => x.Id == languageId);
+            var person = _context.People.Find(personId);
+            if (!language.People.Any(x => x.Id == personId))
+            {
+                language.People.Add(person);
+                _context.SaveChanges();
+            }
+            else
+            {
+                ViewBag.Message = "Thaat person have this language !";
+                ViewBag.Id = language.Id;
+                ViewBag.Language = language.Name;
+                ViewBag.People = new SelectList(_context.People.Where(x => x.Id != personId), "Id", "Name");
+                return View();
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }

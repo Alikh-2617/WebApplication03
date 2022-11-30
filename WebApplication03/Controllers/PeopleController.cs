@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication03.Data;
 using WebApplication03.Models;
@@ -18,8 +19,8 @@ namespace WebApplication03.Controllers
 
         public IActionResult Index()
         {
-            vm.People = _context.People.ToList();
-            return View(vm);
+            
+            return View(_context.People.ToList());
         }
 
         public IActionResult Create()
@@ -95,6 +96,35 @@ namespace WebApplication03.Controllers
             _context.SaveChanges();
             ViewBag.Message4 = "language deleted ! ";
             return View("FetchLanguage", person.Languages);
+        }
+        public IActionResult AddLanguage(string id)
+        {
+            var person = _context.People.FirstOrDefault(x => x.Id == id);
+            ViewBag.Id = person.Id;
+            ViewBag.Person = person.Name;
+            ViewBag.Language = new SelectList(_context.Languages, "Id", "Name");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddLanguage(string languageId , string personId)
+        {
+            var person = _context.People.Include(x => x.Languages).FirstOrDefault(x => x.Id == personId);
+            var language = _context.Languages.Find(languageId);
+            if (!person.Languages.Any(x => x.Id == languageId))
+            {
+                person.Languages.Add(language);
+                _context.SaveChanges();
+            }
+            else
+            {
+                ViewBag.Message = "Thaat person have this language !";
+                ViewBag.Id = language.Id;
+                ViewBag.Person = person.Name;
+                ViewBag.Language = new SelectList(_context.Languages.Where(x => x.Id != languageId), "Id", "Name");
+                return View();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

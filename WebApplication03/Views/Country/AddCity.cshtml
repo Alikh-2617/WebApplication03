@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Add City";
+}
+
+<h1>Add City to Country </h1>
+
+<br />
+<h4>@ViewBag.Message</h4>
+<form asp-action="AddCity" method="post">
+    <div class="form-group">
+
+        <h4>Add City to : @ViewBag.Country</h4>
+    </div>
+    <div class="form-group">
+        <label>Cities</label>
+        <select name="cityId" class="form-control" asp-items="@ViewBag.City"></select>
+    </div>
+       <input type="submit" value="Add To LAnguage" class="btn btn-primary" asp-route-countryId="@ViewBag.Id" />
+
+</form>
+<br />
+<br />
+<a class="btn btn-info" asp-action="Index">Back to Country List</a>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication03.Data;
 using WebApplication03.Models;
@@ -93,6 +94,36 @@ namespace WebApplication03.Controllers
             _context.SaveChanges();
             ViewBag.Message4 = "city deleted ! ";
             return View("FetchCities", country.Cities);
+        }
+
+        public IActionResult AddCity(string id)
+        {
+            var country = _context.Countries.FirstOrDefault(x => x.Id == id);
+            ViewBag.Id = country.Id;
+            ViewBag.Country = country.Name;
+            ViewBag.City = new SelectList(_context.Cities, "Id", "Name");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddCity(string cityId, string countryId)
+        {
+            var country = _context.Countries.Include(x => x.Cities).FirstOrDefault(x => x.Id == countryId);
+            var city = _context.Cities.Find(cityId);
+            if (!country.Cities.Any(x => x.Id == cityId))
+            {
+                country.Cities.Add(city);
+                _context.SaveChanges();
+            }
+            else
+            {
+                ViewBag.Message = "Thais city exist in this country !";
+                ViewBag.Id = country.Id;
+                ViewBag.City = country.Name;
+                ViewBag.City = new SelectList(_context.Cities.Where(x => x.Id != cityId), "Id", "Name");
+                return View();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

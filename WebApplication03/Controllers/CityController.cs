@@ -128,7 +128,6 @@ namespace WebApplication03.Controllers
                 ViewBag.People = new SelectList(_context.People.Where(x=>x.Id != personId), "Id", "Name");
                 return View();
             }
-
             return RedirectToAction("Index");
         }
     }

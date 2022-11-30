@@ -16,6 +16,6 @@ namespace WebApplication03.Models
         public DateTime Register { get; set; }
 
         public List<Language> Languages { get; set; } = new List<Language>();
-        public List<City> Cities { get; set; } = new List<City>();
+        public List<City> Cities { get; set; } = new List<City>();  // Det är extra ! släpp den lista 
     }
 }
