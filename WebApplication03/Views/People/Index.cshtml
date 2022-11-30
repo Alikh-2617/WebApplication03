@@ -1,7 +1,7 @@
 ﻿@model List<Person>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "People";
 }
 
 <h1>People</h1>
@@ -38,14 +38,12 @@
                 <td>@person.Age</td>
                 <td>@person.PhoneNumber</td>
                 <td>@person.Register</td>
-                <th>
                 <td>
                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@person.Id">Edit</a> |
                     <a class="btn btn-info" asp-action="AddLanguage" asp-route-id="@person.Id">Add language to person</a> |
                     <a class="btn btn-info" asp-action="FetchLanguage" asp-route-id="@person.Id">language he speak</a> |
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@person.Id">Delete</a>
                 </td>
-                </th>
             </tr>
         }
     </tbody>
