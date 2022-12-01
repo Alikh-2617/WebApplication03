@@ -91,7 +91,7 @@ namespace WebApplication03.Controllers
             ViewBag.Message3 = $"there is no person for this city in Database !";
             return View(city.People);
         }
-        public IActionResult DeletePerson(string personid , string cityid)
+        public IActionResult DeletePerson(string personid, string cityid)
         {
             var city = _context.Cities.Include(x => x.People).FirstOrDefault(x => x.Id == cityid);
             var person = _context.People.Find(personid);
@@ -106,14 +106,14 @@ namespace WebApplication03.Controllers
             var city = _context.Cities.FirstOrDefault(x => x.Id == id);
             ViewBag.Id = city.Id;
             ViewBag.City = city.Name;
-            ViewBag.People = new SelectList(_context.People, "Id" , "Name"); 
+            ViewBag.People = new SelectList(_context.People, "Id", "Name");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddPeople(string cityId ,string personId)
+        public IActionResult AddPeople(string cityId, string personId)
         {
-            var city = _context.Cities.Include(x=>x.People).FirstOrDefault(x=>x.Id == cityId);
+            var city = _context.Cities.Include(x => x.People).FirstOrDefault(x => x.Id == cityId);
             var person = _context.People.Find(personId);
             if (!city.People.Any(x => x.Id == personId))
             {
@@ -125,7 +125,7 @@ namespace WebApplication03.Controllers
                 ViewBag.Message = "That person living in this City !";
                 ViewBag.Id = city.Id;
                 ViewBag.City = city.Name;
-                ViewBag.People = new SelectList(_context.People.Where(x=>x.Id != personId), "Id", "Name");
+                ViewBag.People = new SelectList(_context.People.Where(x => x.Id != personId), "Id", "Name");
                 return View();
             }
             return RedirectToAction("Index");

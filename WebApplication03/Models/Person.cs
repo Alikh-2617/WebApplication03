@@ -7,7 +7,7 @@ namespace WebApplication03.Models
         [Key]
         public string Id { get; set; }
 
-        public string  Name { get; set; }
+        public string Name { get; set; }
 
         public int Age { get; set; }
 
@@ -15,7 +15,8 @@ namespace WebApplication03.Models
 
         public DateTime Register { get; set; }
 
+        public City? City { get; set; }
+
         public List<Language> Languages { get; set; } = new List<Language>();
-        public List<City> Cities { get; set; } = new List<City>();  // Det är extra ! släpp den lista 
     }
 }

@@ -80,20 +80,20 @@ namespace WebApplication03.Controllers
 
         public IActionResult FetchCities(string id)
         {
-            var country = _context.Countries.Include(x => x.Cities).FirstOrDefault(x => x.Id == id);
+            var country = _context.Countries.Include(x => x.cities).FirstOrDefault(x => x.Id == id);
             ViewBag.Id = country.Id;
             ViewBag.Message1 = country.Name;
             ViewBag.Message3 = $"there is no city for this country in Database !";
-            return View(country.Cities);
+            return View(country.cities);
         }
         public IActionResult DeleteCity(string countryid, string cityid)
         {
-            var country = _context.Countries.Include(x => x.Cities).FirstOrDefault(x => x.Id == countryid);
+            var country = _context.Countries.Include(x => x.cities).FirstOrDefault(x => x.Id == countryid);
             var city = _context.Cities.Find(cityid);
-            country.Cities.Remove(city);
+            country.cities.Remove(city);
             _context.SaveChanges();
             ViewBag.Message4 = "city deleted ! ";
-            return View("FetchCities", country.Cities);
+            return View("FetchCities", country.cities);
         }
 
         public IActionResult AddCity(string id)
@@ -108,11 +108,11 @@ namespace WebApplication03.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddCity(string cityId, string countryId)
         {
-            var country = _context.Countries.Include(x => x.Cities).FirstOrDefault(x => x.Id == countryId);
+            var country = _context.Countries.Include(x => x.cities).FirstOrDefault(x => x.Id == countryId);
             var city = _context.Cities.Find(cityId);
-            if (!country.Cities.Any(x => x.Id == cityId))
+            if (!country.cities.Any(x => x.Id == cityId))
             {
-                country.Cities.Add(city);
+                country.cities.Add(city);
                 _context.SaveChanges();
             }
             else

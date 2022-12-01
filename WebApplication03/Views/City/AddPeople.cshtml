@@ -15,9 +15,8 @@
         <label>Person</label>
         <select name="personId" class="form-control" asp-items="@ViewBag.People"></select>
     </div>
-@*    här ska lätt till cityID och skicka den till controller
-    *@    <input type="submit" value="Add To City" class="btn btn-primary" asp-route-cityId="@ViewBag.Id" />
-
+    <br />
+    <input type="submit" value="Add To City" class="btn btn-success" asp-route-cityId="@ViewBag.Id" />
 </form>
 <br />
 <br />

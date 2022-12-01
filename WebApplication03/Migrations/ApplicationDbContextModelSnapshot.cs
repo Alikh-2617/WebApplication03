@@ -22,36 +22,6 @@ namespace WebApplication03.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("CityCountry", b =>
-                {
-                    b.Property<string>("CitiesId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CountriesId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CitiesId", "CountriesId");
-
-                    b.HasIndex("CountriesId");
-
-                    b.ToTable("CityCountry");
-                });
-
-            modelBuilder.Entity("CityPerson", b =>
-                {
-                    b.Property<string>("CitiesId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PeopleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CitiesId", "PeopleId");
-
-                    b.HasIndex("PeopleId");
-
-                    b.ToTable("CityPerson");
-                });
-
             modelBuilder.Entity("LanguagePerson", b =>
                 {
                     b.Property<string>("LanguagesId")
@@ -69,14 +39,17 @@ namespace WebApplication03.Migrations
                     b.HasData(
                         new
                         {
-                            LanguagesId = "a1fd255e-4ac9-4b59-9824-8858e8a3f2c6",
-                            PeopleId = "9d4a7b70-b3e3-4eaa-8bef-1844cb2f427a"
+                            LanguagesId = "e6dbf485-c2a6-40bf-ac55-3667cafa4c39",
+                            PeopleId = "f5522beb-c267-4461-8d7c-53e2246adc5a"
                         });
                 });
 
             modelBuilder.Entity("WebApplication03.Models.City", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CountryId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
@@ -92,29 +65,31 @@ namespace WebApplication03.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CountryId");
+
                     b.ToTable("Cities");
 
                     b.HasData(
                         new
                         {
-                            Id = "4be5ad4d-6b10-4e2c-bcb5-b1883fc28364",
+                            Id = "e27cbb32-ff29-4884-a94c-8b7b60bc2b2f",
                             Name = "GBG",
                             PostNumber = "415 52",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1608)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9989)
                         },
                         new
                         {
-                            Id = "39483b94-c0b4-4d44-8659-d677154e544a",
+                            Id = "552443b2-6831-4720-8023-43f843fa1d9f",
                             Name = "Järpen",
                             PostNumber = "415 55",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1614)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9994)
                         },
                         new
                         {
-                            Id = "e942d842-0228-4db8-a03a-f7bc9c6459ae",
+                            Id = "b4b589b9-e05b-41e7-a706-1cb2751d0beb",
                             Name = "Mörsil",
                             PostNumber = "415 44",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1619)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9998)
                         });
                 });
 
@@ -137,21 +112,21 @@ namespace WebApplication03.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "699e9f36-6d88-41ee-9e22-7f0e7bf3b320",
+                            Id = "0b6fdd2f-e148-4b35-aa63-5b863359821a",
                             Name = "Sweden",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1693)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 654, DateTimeKind.Local).AddTicks(20)
                         },
                         new
                         {
-                            Id = "fc1022dd-7f8a-48c5-b4d8-ee18b4cc0228",
+                            Id = "5c97ca1e-d39a-4958-9d88-c37f62bbff81",
                             Name = "Norway",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1701)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 654, DateTimeKind.Local).AddTicks(27)
                         },
                         new
                         {
-                            Id = "9208e40c-5896-42fd-934d-3dd6876b00fc",
+                            Id = "aaeceb46-e21a-4904-aa61-e5f802ca0890",
                             Name = "Danmarc",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1705)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 654, DateTimeKind.Local).AddTicks(32)
                         });
                 });
 
@@ -174,27 +149,27 @@ namespace WebApplication03.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a1fd255e-4ac9-4b59-9824-8858e8a3f2c6",
+                            Id = "e6dbf485-c2a6-40bf-ac55-3667cafa4c39",
                             Name = "Svenska",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(715)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9013)
                         },
                         new
                         {
-                            Id = "6f31dec1-68ed-43eb-8879-48fefa9b300e",
+                            Id = "ebdc3afb-727b-4e94-a70e-d5589a810f47",
                             Name = "Svenska",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1535)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9915)
                         },
                         new
                         {
-                            Id = "5fa3acd2-10fc-497c-9263-c8cb8e82442a",
+                            Id = "964212fe-169e-47d7-b581-dd91fd5d153b",
                             Name = "Persiska",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1547)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9925)
                         },
                         new
                         {
-                            Id = "5eb94ff2-e70b-42bf-8235-0b68823539c6",
+                            Id = "883e5698-b1a8-4ea7-819f-4a5079df4949",
                             Name = "Engleska",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1563)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9940)
                         });
                 });
 
@@ -205,6 +180,9 @@ namespace WebApplication03.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
+
+                    b.Property<string>("CityId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -219,71 +197,43 @@ namespace WebApplication03.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
                     b.ToTable("People");
 
                     b.HasData(
                         new
                         {
-                            Id = "9d4a7b70-b3e3-4eaa-8bef-1844cb2f427a",
+                            Id = "f5522beb-c267-4461-8d7c-53e2246adc5a",
                             Age = 32,
                             Name = "Ali",
                             PhoneNumber = "123456",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(775)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9082)
                         },
                         new
                         {
-                            Id = "7b4e46c6-eeb9-4348-8b79-9c03e9e0d049",
+                            Id = "f1cbc93c-af18-4d05-ab0e-e39fd146e32f",
                             Age = 32,
                             Name = "Ali",
                             PhoneNumber = "123456",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1579)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9963)
                         },
                         new
                         {
-                            Id = "0f911629-8b2a-45e0-b992-02bf00de2501",
+                            Id = "7c544e13-ff95-42bd-9d98-4fc006fda9f8",
                             Age = 32,
                             Name = "Ali 1",
                             PhoneNumber = "123456",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1583)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9968)
                         },
                         new
                         {
-                            Id = "6d08ef9c-ee82-4118-9d91-1c61e2f1514a",
+                            Id = "2163f1c3-18b9-4273-b25b-eb4b45b0fd49",
                             Age = 32,
                             Name = "Ali 2",
                             PhoneNumber = "123456",
-                            Register = new DateTime(2022, 11, 29, 16, 3, 7, 136, DateTimeKind.Local).AddTicks(1587)
+                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9972)
                         });
-                });
-
-            modelBuilder.Entity("CityCountry", b =>
-                {
-                    b.HasOne("WebApplication03.Models.City", null)
-                        .WithMany()
-                        .HasForeignKey("CitiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApplication03.Models.Country", null)
-                        .WithMany()
-                        .HasForeignKey("CountriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CityPerson", b =>
-                {
-                    b.HasOne("WebApplication03.Models.City", null)
-                        .WithMany()
-                        .HasForeignKey("CitiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApplication03.Models.Person", null)
-                        .WithMany()
-                        .HasForeignKey("PeopleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("LanguagePerson", b =>
@@ -299,6 +249,34 @@ namespace WebApplication03.Migrations
                         .HasForeignKey("PeopleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplication03.Models.City", b =>
+                {
+                    b.HasOne("WebApplication03.Models.Country", "Country")
+                        .WithMany("cities")
+                        .HasForeignKey("CountryId");
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("WebApplication03.Models.Person", b =>
+                {
+                    b.HasOne("WebApplication03.Models.City", "City")
+                        .WithMany("People")
+                        .HasForeignKey("CityId");
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("WebApplication03.Models.City", b =>
+                {
+                    b.Navigation("People");
+                });
+
+            modelBuilder.Entity("WebApplication03.Models.Country", b =>
+                {
+                    b.Navigation("cities");
                 });
 #pragma warning restore 612, 618
         }

@@ -19,7 +19,7 @@ namespace WebApplication03.Controllers
 
         public IActionResult Index()
         {
-            
+
             return View(_context.People.ToList());
         }
 
@@ -107,7 +107,7 @@ namespace WebApplication03.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddLanguage(string languageId , string personId)
+        public IActionResult AddLanguage(string languageId, string personId)
         {
             var person = _context.People.Include(x => x.Languages).FirstOrDefault(x => x.Id == personId);
             var language = _context.Languages.Find(languageId);

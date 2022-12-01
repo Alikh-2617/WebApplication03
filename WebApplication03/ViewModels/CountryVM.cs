@@ -8,6 +8,6 @@ namespace WebApplication03.ViewModels
 
         public List<Country> Countries { get; set; }
 
-        public string  Search { get; set; }
+        public string Search { get; set; }
     }
 }
