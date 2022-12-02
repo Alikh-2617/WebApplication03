@@ -47,7 +47,7 @@ namespace WebApplication03.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -63,7 +63,8 @@ namespace WebApplication03.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return NotFound();
+            ViewBag.Message = "Something wrong happend and we could not chenge the targel, try agan !";
+            return View();
         }
 
         public IActionResult Delete(string Id)
