@@ -98,6 +98,11 @@ namespace WebApplication03.Controllers
             ViewBag.Message4 = "language deleted ! ";
             return View("FetchLanguage", person.Languages);
         }
+
+
+        // här bor har Admin roll 
+        // läg till city View till personer 
+
         public IActionResult AddLanguage(string id)
         {
             var person = _context.People.FirstOrDefault(x => x.Id == id);
