@@ -41,7 +41,12 @@
                     <a class="btn btn-success" asp-action="Edit" asp-route-id="@person.Id">Edit</a> |
                     <a class="btn btn-info" asp-action="AddLanguage" asp-route-id="@person.Id">Add language to person</a> |
                     <a class="btn btn-info" asp-action="FetchLanguage" asp-route-id="@person.Id">language he speak</a> |
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@person.Id">Delete</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@person.Id">Delete</a>
+                        @* Vi kan lägga funktionen Delete i en annan controller som bara Admin kan komma åt också Vid Behöv*@
+                    }
+
                 </td>
             </tr>
         }

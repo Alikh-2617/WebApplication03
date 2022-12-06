@@ -1,13 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using WebApplication03.Data;
 using WebApplication03.Models;
 using WebApplication03.ViewModels;
 
 namespace WebApplication03.Controllers
 {
+    // bör man vara inloggat
+    //[Authorize]
+    [Authorize(Roles = "Admin")]
     public class CityController : Controller
     {
         // bara föratt kunna skicka data som ViewModel

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication03.Models;
@@ -6,6 +7,9 @@ using WebApplication03.ViewModels;
 
 namespace WebApplication03.Controllers
 {
+    // bör man vara inloggat
+    //[Authorize]
+    [Authorize(Roles = "Admin")]
     public class IdentityController : Controller
     {
         // för att hantera roller vi bör har till gång till Identity Tabler som ligger här 

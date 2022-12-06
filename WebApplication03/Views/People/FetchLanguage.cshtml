@@ -34,7 +34,11 @@
                         @language.Register
                     </td>
                     <td>
-                        <a class="btn btn-danger" asp-action="DeleteLanguage" asp-route-languageid="@language.Id" asp-route-personid="@ViewBag.Id">Delete</a>
+                        @if(User.IsInRole("Admin"))
+                        {
+                            <a class="btn btn-danger" asp-action="DeleteLanguage" asp-route-languageid="@language.Id" asp-route-personid="@ViewBag.Id">Delete</a>
+                             @*vi kan lägga till funktion Delet i andra controller som bara admin kan komma åt också , Vid behöv*@
+                        }
                     </td>
                 </tr>
             }

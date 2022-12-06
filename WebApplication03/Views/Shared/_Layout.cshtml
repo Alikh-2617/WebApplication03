@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/WebApplication03.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+    <header >
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -24,24 +24,28 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="People" asp-action="Index">People</a>
                             </li>
+                            @if(User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Language" asp-action="Index">Language</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="City" asp-action="Index">City</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Country" asp-action="Index">Country</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Identity Menu</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                        <li><a class="dropdown-item" asp-controller="Identity" asp-action="ShowAllUsers">Show All User</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Identity" asp-action="ShowAllRoles">Show All Roll</a></li>
+                                        <li></li>
+                                    </ul>
+                                </li>
+                            }
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Language" asp-action="Index">Language</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="City" asp-action="Index">City</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Country" asp-action="Index">Country</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Identity Menu</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                <li><a class="dropdown-item" asp-controller="Identity" asp-action="ShowAllUsers">Show All User</a></li>
-                                <li><a class="dropdown-item" asp-controller="Identity" asp-action="ShowAllRoles">Show All Roll</a></li>
-                                <li></li>
-                            </ul>
-                        </li>
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

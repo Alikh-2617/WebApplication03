@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication03.Data;
@@ -7,6 +8,9 @@ using WebApplication03.ViewModels;
 
 namespace WebApplication03.Controllers
 {
+    // bör man vara inloggat
+    //[Authorize]
+    [Authorize(Roles = "Admin")]
     public class LanguageController : Controller
     {
         private LanguageVM vm = new LanguageVM();
