@@ -19,11 +19,14 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                                                <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Language" asp-action="Index">Language</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="People" asp-action="Index">People</a>
+                            </li>
+                        }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="People" asp-action="Index">People</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Language" asp-action="Index">Language</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="City" asp-action="Index">City</a>
@@ -31,7 +34,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Country" asp-action="Index">Country</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Identity Menu</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                <li><a class="dropdown-item" asp-controller="Identity" asp-action="ShowAllUsers">Show All User</a></li>
+                                <li><a class="dropdown-item" asp-controller="Identity" asp-action="ShowAllRoles">Show All Roll</a></li>
+                                <li></li>
+                            </ul>
+                        </li>
                     </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

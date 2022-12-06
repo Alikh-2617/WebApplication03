@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication03.Data;
@@ -7,6 +8,11 @@ using WebApplication03.ViewModels;
 
 namespace WebApplication03.Controllers
 {
+    // bör man vara inloggat
+    [Authorize]
+ //   [Authorize(Roles ="Admin")]
+
+
     public class PeopleController : Controller
     {
         // bara föratt kunna skicka data som ViewModel
@@ -69,6 +75,21 @@ namespace WebApplication03.Controllers
             return View();
         }
 
+        public IActionResult FetchLanguage(string id)
+        {
+            var person = _context.People.Include(x => x.Languages).FirstOrDefault(x => x.Id == id);
+            ViewBag.Id = person.Id;
+            ViewBag.Message1 = person.Name;
+            ViewBag.Message3 = $"There is no language for him in the Database : {person.Name}";
+            return View(person.Languages);
+        }
+
+
+        // här bor har Admin roll 
+        // läg till city View till personer 
+        //
+
+
         public IActionResult Delete(string Id)
         {
             var person = _context.People.FirstOrDefault(x => x.Id == Id);
@@ -81,14 +102,6 @@ namespace WebApplication03.Controllers
             return NotFound();
         }
 
-        public IActionResult FetchLanguage(string id)
-        {
-            var person = _context.People.Include(x => x.Languages).FirstOrDefault(x => x.Id == id);
-            ViewBag.Id = person.Id;
-            ViewBag.Message1 = person.Name;
-            ViewBag.Message3 = $"There is no language for him in the Database : {person.Name}";
-            return View(person.Languages);
-        }
         public IActionResult DeleteLanguage(string languageid, string personid)
         {
             var person = _context.People.Include(x => x.Languages).FirstOrDefault(x => x.Id == personid);
@@ -98,11 +111,6 @@ namespace WebApplication03.Controllers
             ViewBag.Message4 = "language deleted ! ";
             return View("FetchLanguage", person.Languages);
         }
-
-
-        // här bor har Admin roll 
-        // läg till city View till personer 
-        //
 
         public IActionResult AddLanguage(string id)
         {

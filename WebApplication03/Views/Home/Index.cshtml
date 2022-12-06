@@ -4,5 +4,27 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>HOME</a>.</p>
+    <p>HOME</p>
 </div>
+<hr />
+<br />
+<br />
+<br />
+<br />
+<br />
+@if(User.Identity.IsAuthenticated)
+{
+
+    <h3 class="text-center">Hi</h3>
+    <h5 class="text-center">You are in your account </h5>
+    @if (User.IsInRole("Admin"))
+    {
+        <h1 class="text-center">Every thing is right Admin </h1>
+    }
+}
+@if(!User.Identity.IsAuthenticated)
+{
+    <h3 class="text-center">Hi Here is the Home Page </h3>
+    <h3 class="text-center">you can try to counting to 100 if you have boring  </h3>
+    
+}

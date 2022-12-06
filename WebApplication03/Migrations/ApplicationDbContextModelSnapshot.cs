@@ -39,8 +39,269 @@ namespace WebApplication03.Migrations
                     b.HasData(
                         new
                         {
-                            LanguagesId = "e6dbf485-c2a6-40bf-ac55-3667cafa4c39",
-                            PeopleId = "f5522beb-c267-4461-8d7c-53e2246adc5a"
+                            LanguagesId = "d5196612-f8aa-40d2-b63f-848f2784c545",
+                            PeopleId = "8acac708-9de3-4c4f-9d4e-84078cb75cc7"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2e6a72cc-bde5-43c1-8b1c-cc15c5fc9c87",
+                            ConcurrencyStamp = "5789c979-0e02-4a06-9f34-e0b623339cbc",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "ccbe6d77-4278-4923-ab05-d39d1253cc43",
+                            ConcurrencyStamp = "ef6be23b-1abd-40c6-8de6-80dc45dd22f7",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "523eaa95-fa56-48f8-832e-0857fa68d910",
+                            RoleId = "2e6a72cc-bde5-43c1-8b1c-cc15c5fc9c87"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("WebApplication03.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EfterName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Register")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "523eaa95-fa56-48f8-832e-0857fa68d910",
+                            AccessFailedCount = 0,
+                            Age = 0,
+                            ConcurrencyStamp = "0047c43c-5663-4fd1-8c9f-414201979585",
+                            EfterName = "Adminson",
+                            Email = "admin@admin.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            Name = "Admin",
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            NormalizedUserName = "ADMIN1@ADMIN.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL8sWjQvZWGdRcMgkmWsrOOeHUMMMag4bL0EtPWsc0gaZYXrQhzCwhQw/HxOdjveKw==",
+                            PhoneNumberConfirmed = false,
+                            Register = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SecurityStamp = "dc982748-e92c-4298-ae94-232198abe103",
+                            TwoFactorEnabled = false,
+                            UserName = "admin1@admin.com"
                         });
                 });
 
@@ -72,24 +333,24 @@ namespace WebApplication03.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e27cbb32-ff29-4884-a94c-8b7b60bc2b2f",
+                            Id = "1a80182f-3ada-4153-9506-d0aebe277304",
                             Name = "GBG",
                             PostNumber = "415 52",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9989)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9612)
                         },
                         new
                         {
-                            Id = "552443b2-6831-4720-8023-43f843fa1d9f",
+                            Id = "8ae4970a-9ba0-45d6-b86a-f0614f4f1175",
                             Name = "Järpen",
                             PostNumber = "415 55",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9994)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9619)
                         },
                         new
                         {
-                            Id = "b4b589b9-e05b-41e7-a706-1cb2751d0beb",
+                            Id = "5d637e48-459a-4473-a2f7-4abeb9479918",
                             Name = "Mörsil",
                             PostNumber = "415 44",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9998)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9624)
                         });
                 });
 
@@ -112,21 +373,21 @@ namespace WebApplication03.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0b6fdd2f-e148-4b35-aa63-5b863359821a",
+                            Id = "d802dc3f-3a04-487a-bd88-f741bf9e9316",
                             Name = "Sweden",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 654, DateTimeKind.Local).AddTicks(20)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9653)
                         },
                         new
                         {
-                            Id = "5c97ca1e-d39a-4958-9d88-c37f62bbff81",
+                            Id = "3be19c96-d6a9-4d59-b2f6-a0daa1dfa8c5",
                             Name = "Norway",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 654, DateTimeKind.Local).AddTicks(27)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9662)
                         },
                         new
                         {
-                            Id = "aaeceb46-e21a-4904-aa61-e5f802ca0890",
+                            Id = "38d510ec-87a0-4e55-8a41-f92460b7ed3f",
                             Name = "Danmarc",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 654, DateTimeKind.Local).AddTicks(32)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9666)
                         });
                 });
 
@@ -149,27 +410,27 @@ namespace WebApplication03.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e6dbf485-c2a6-40bf-ac55-3667cafa4c39",
+                            Id = "d5196612-f8aa-40d2-b63f-848f2784c545",
                             Name = "Svenska",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9013)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(8471)
                         },
                         new
                         {
-                            Id = "ebdc3afb-727b-4e94-a70e-d5589a810f47",
+                            Id = "d9ac44e0-41ef-43cd-a65d-9f690c15bd3a",
                             Name = "Svenska",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9915)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9500)
                         },
                         new
                         {
-                            Id = "964212fe-169e-47d7-b581-dd91fd5d153b",
+                            Id = "9b02ecc2-50d4-42d3-a791-956267c20280",
                             Name = "Persiska",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9925)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9513)
                         },
                         new
                         {
-                            Id = "883e5698-b1a8-4ea7-819f-4a5079df4949",
+                            Id = "17a57c38-3c3d-4f2e-a867-989a3846c50f",
                             Name = "Engleska",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9940)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9535)
                         });
                 });
 
@@ -204,35 +465,35 @@ namespace WebApplication03.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f5522beb-c267-4461-8d7c-53e2246adc5a",
+                            Id = "8acac708-9de3-4c4f-9d4e-84078cb75cc7",
                             Age = 32,
                             Name = "Ali",
                             PhoneNumber = "123456",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9082)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(8562)
                         },
                         new
                         {
-                            Id = "f1cbc93c-af18-4d05-ab0e-e39fd146e32f",
+                            Id = "dfda4694-efaa-4698-9cdd-8847156ea371",
                             Age = 32,
                             Name = "Ali",
                             PhoneNumber = "123456",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9963)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9563)
                         },
                         new
                         {
-                            Id = "7c544e13-ff95-42bd-9d98-4fc006fda9f8",
+                            Id = "ab1d5607-9045-448f-808a-84e0ca1465f1",
                             Age = 32,
                             Name = "Ali 1",
                             PhoneNumber = "123456",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9968)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9575)
                         },
                         new
                         {
-                            Id = "2163f1c3-18b9-4273-b25b-eb4b45b0fd49",
+                            Id = "fa0e8a8b-1b25-4aab-824c-2f2c8a209c73",
                             Age = 32,
                             Name = "Ali 2",
                             PhoneNumber = "123456",
-                            Register = new DateTime(2022, 12, 1, 21, 26, 9, 653, DateTimeKind.Local).AddTicks(9972)
+                            Register = new DateTime(2022, 12, 6, 10, 30, 16, 38, DateTimeKind.Local).AddTicks(9580)
                         });
                 });
 
@@ -247,6 +508,57 @@ namespace WebApplication03.Migrations
                     b.HasOne("WebApplication03.Models.Person", null)
                         .WithMany()
                         .HasForeignKey("PeopleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("WebApplication03.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("WebApplication03.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication03.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("WebApplication03.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,0 +1,31 @@
+﻿@model UserRolesVM
+@{
+    ViewData["Title"] = "All Roles";
+}
+
+<h1>All Roles for : @Model.Name </h1>
+
+<a asp-action="AddRoleToUser" class="btn btn-primary" asp-route-userId="@Model.UserId">Add Role To User</a>
+<h4>@ViewBag.Message</h4>
+<hr />
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>*Role Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var role in Model.Roles)
+        {
+            <tr>
+                <td>
+                    @role
+                </td>
+                <td><a class="btn btn-danger" asp-action="DeletUsersRole"  asp-route-roleName="@role" asp-route-userId="@Model.UserId">Delet Role from User</a>  </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

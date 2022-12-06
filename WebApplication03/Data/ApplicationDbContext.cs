@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using WebApplication03.Models;
 
 namespace WebApplication03.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
         {
@@ -61,10 +63,51 @@ namespace WebApplication03.Data
                 new Country { Id = Guid.NewGuid().ToString(), Name = "Norway", Register = DateTime.Now },
                 new Country { Id = Guid.NewGuid().ToString(), Name = "Danmarc", Register = DateTime.Now });
 
+            // skapa Gouid Id innan vi skapar för att kunna matta samma Guid till person och roll
+            string adminRoleId = Guid.NewGuid().ToString();
+            string userRoleId = Guid.NewGuid().ToString();
+            string userId = Guid.NewGuid().ToString();
 
+            // seeda roller Admin och User
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole
+                {
+                    Id = adminRoleId,
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
+                });
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole
+                {
+                    Id = userRoleId,
+                    Name = "User",
+                    NormalizedName = "USER"
+                });
 
+            // seeded en person
+            PasswordHasher<ApplicationUser> hasher = new PasswordHasher<ApplicationUser>();
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser
+                {
+                    Id = userId,
+                    Email = "admin@admin.com",
+                    NormalizedEmail = "ADMIN@ADMIN.COM",
+                    UserName = "admin1@admin.com",
+                    NormalizedUserName = "ADMIN1@ADMIN.COM",
+                    Name = "Admin",
+                    EfterName = "Adminson",
+                    //Age = 0 ,
+                    //Register = DateTime.Now,
+                    PasswordHash = hasher.HashPassword(null , "password")
+                });
 
-
+            // lägga Roll till person
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = adminRoleId,
+                    UserId = userId,
+                });
         }
 
     }
