@@ -54,7 +54,7 @@ namespace WebApplication03.Controllers
         public async Task<IActionResult> AddRoleToUser(string userId , string roleName)
         {
             var user = await _userManager.FindByIdAsync(userId);
-            await _userManager.AddToRoleAsync(user, roleName);   // if om rolen finns redan så skicka message
+            await _userManager.AddToRoleAsync(user, roleName);   // if om rolen finns redan så skicka message//
             return RedirectToAction("ShowUserRoles" , new {id = userId}); // view som visar alla rolles till en användare
         }
 
