@@ -11,8 +11,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>*Role Name</th>
+            <th>Role Name</th>
             <th></th>
+
         </tr>
     </thead>
     <tbody>
@@ -28,5 +29,7 @@
     </tbody>
 </table>
 
-<a asp-action="AddRoleToUser" class="btn btn-primary" asp-route-userId="@Model.UserId">Add Role To User</a>
-<a asp-action="ShowAllUsers" class="btn btn-info">back to user list</a>
+<div>
+    <a asp-action="AddRoleToUser" class="btn btn-primary" asp-route-userId="@Model.UserId">Add Role To User</a>
+    <a asp-action="ShowAllUsers" class="btn btn-info">back to user list</a>
+</div>
