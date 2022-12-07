@@ -128,8 +128,9 @@ namespace WebApplication03.Areas.Identity.Pages.Account             // rader som
                 user.Name = Input.Name;
                 user.EfterName = Input.EfterName;
                 user.Age = Input.Age;
-                user.Register = Input.Register;
+                user.Register = DateTime.Now;
 
+                // här kan vi ändra vår UserName från Email till Name !! 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
