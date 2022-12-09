@@ -23,7 +23,16 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+// connection till View UI 
+builder.Services.AddCors(
+    x => x.AddPolicy("corsPolicy", builder => 
+    { builder.WithOrigins("*").
+        AllowAnyMethod().
+        AllowAnyHeader(); 
+    }));
+
 //----------------------------------------------
+
 
 var app = builder.Build();
 
@@ -42,6 +51,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 //---------------------------efter routing
+app.UseCors("corsPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();    
