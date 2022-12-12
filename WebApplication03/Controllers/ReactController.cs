@@ -25,7 +25,18 @@ namespace WebApplication03.Controllers
             return people;
         }
 
-
+        [HttpDelete("{id}")]
+        public IActionResult Deletet(string id)
+        {
+            var person = _context.People.Find(id);
+            if(person == null)
+            {
+                return StatusCode(404);
+            }
+            _context.People.Remove(person);
+            _context.SaveChanges();
+            return StatusCode(200);
+        }
 
 
     }
