@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApplication03.Data;
 using WebApplication03.Models;
 
@@ -17,13 +18,17 @@ namespace WebApplication03.Controllers
         }
 
 
+
         [HttpGet]
         public List<Person> GetPeople()
         {
             List<Person> people = new List<Person>();
-            people = _context.People.ToList();
+            people = _context.People.Include(x => x.City).Include(j => j.City.Country).ToList();
             return people;
         }
+
+        //[HttpGet]
+        //[Route("{id}")]
 
         [HttpDelete("{id}")]
         public IActionResult Deletet(string id)
@@ -37,6 +42,8 @@ namespace WebApplication03.Controllers
             _context.SaveChanges();
             return StatusCode(200);
         }
+
+
 
 
     }
