@@ -29,6 +29,15 @@ namespace WebApplication03.Controllers
             return people;
         }
 
+        [HttpGet("city")]
+        public List<City> GetCityes()
+        {
+            List<City> cities = new List<City>();
+            List<string> cities2 = new List<string>();
+            cities = _context.Cities.ToList();
+            return cities;
+        }
+
         //[HttpGet]
         //[Route("{id}")]
 
