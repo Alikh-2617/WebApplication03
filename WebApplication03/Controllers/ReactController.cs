@@ -26,7 +26,8 @@ namespace WebApplication03.Controllers
         public List<Person> GetPeople()
         {
             List<Person> people = new List<Person>();
-            people = _context.People.Include(x => x.City).Include(y=>y.Languages).Include(j => j.City.Country).ToList();
+            //people = _context.People.Include(x => x.City).Include(y=>y.Languages).Include(j => j.City.Country).ToList();
+            people = _context.People.Include(x => x.City).ToList();
             return people;
         }
 
