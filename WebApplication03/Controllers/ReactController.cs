@@ -5,6 +5,7 @@ using System.Text.Json.Nodes;
 using WebApplication03.Data;
 using WebApplication03.Models;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace WebApplication03.Controllers
 {
@@ -33,8 +34,8 @@ namespace WebApplication03.Controllers
         public List<City> GetCityes()
         {
             List<City> cities = new List<City>();
-            List<string> cities2 = new List<string>();
             cities = _context.Cities.ToList();
+            // det går specificera vilka delar av city ska skickas också !
             return cities;
         }
 
@@ -57,19 +58,32 @@ namespace WebApplication03.Controllers
         [HttpPost("create")]
         public IActionResult create(JsonObject person)
         {
+            Person personToCreate = new Person();
             string jsonPerson = person.ToString();
-            // göra om den till Json
-            Person personToCreate = JsonConvert.DeserializeObject<Person>(jsonPerson);
+
+            React reactObject = JsonConvert.DeserializeObject<React>(jsonPerson);
+            if(reactObject == null)
+            {
+                // föratt om det är null då server rejecta direkt 
+                return StatusCode(404);
+            }
             personToCreate.Id = Guid.NewGuid().ToString();
-            if (personToCreate != null)
+            personToCreate.Name =  reactObject.Name;
+            personToCreate.Age = reactObject.age;
+            personToCreate.PhoneNumber = reactObject.Phonenumber;
+            personToCreate.Register = DateTime.Now;
+            string cityId = reactObject.city;
+            var city = _context.Cities.Find(cityId);
+            if (city == null)
             {
                 _context.People.Add(personToCreate);
                 _context.SaveChanges();
                 return StatusCode(200);
             }
-            return StatusCode(404);
+            personToCreate.City = city;
+            _context.People.Add(personToCreate);
+            _context.SaveChanges();
+            return StatusCode(200);
         }
-
-
     }
 }
