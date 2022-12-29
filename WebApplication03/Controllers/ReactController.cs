@@ -63,28 +63,29 @@ namespace WebApplication03.Controllers
             string jsonPerson = person.ToString();
 
             React reactObject = JsonConvert.DeserializeObject<React>(jsonPerson);
-            if(reactObject == null)
+
+            if(reactObject != null)
             {
-                // föratt om det är null då server rejecta direkt 
-                return StatusCode(404);
-            }
-            personToCreate.Id = Guid.NewGuid().ToString();
-            personToCreate.Name =  reactObject.Name;
-            personToCreate.Age = reactObject.age;
-            personToCreate.PhoneNumber = reactObject.Phonenumber;
-            personToCreate.Register = DateTime.Now;
-            string cityId = reactObject.city;
-            var city = _context.Cities.Find(cityId);
-            if (city == null)
-            {
+                personToCreate.Id = Guid.NewGuid().ToString();
+                personToCreate.Name = reactObject.Name;
+                personToCreate.Age = reactObject.age;
+                personToCreate.PhoneNumber = reactObject.Phonenumber;
+                personToCreate.Register = DateTime.Now;
+                string cityId = reactObject.city;
+                var city = _context.Cities.Find(cityId);
+                if (city != null)
+                {
+                    personToCreate.City = city;
+                    _context.People.Add(personToCreate);
+                    _context.SaveChanges();
+                    return StatusCode(200);
+                }
                 _context.People.Add(personToCreate);
                 _context.SaveChanges();
                 return StatusCode(200);
             }
-            personToCreate.City = city;
-            _context.People.Add(personToCreate);
-            _context.SaveChanges();
-            return StatusCode(200);
+
+            return StatusCode(404);
         }
     }
 }
