@@ -59,13 +59,12 @@ namespace WebApplication03.Controllers
         [HttpPost("create")]
         public IActionResult create(JsonObject person)
         {
-            Person personToCreate = new Person();
             string jsonPerson = person.ToString();
-
             React reactObject = JsonConvert.DeserializeObject<React>(jsonPerson);
 
             if(reactObject != null)
             {
+                Person personToCreate = new Person();
                 personToCreate.Id = Guid.NewGuid().ToString();
                 personToCreate.Name = reactObject.Name;
                 personToCreate.Age = reactObject.age;
