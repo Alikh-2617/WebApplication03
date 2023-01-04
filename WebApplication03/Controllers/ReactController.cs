@@ -43,7 +43,7 @@ namespace WebApplication03.Controllers
         //[HttpGet]
         //[Route("{id}")]
 
-        [HttpDelete("{id}")]
+        [HttpGet("{id}")]
         public IActionResult Deletet(string id)
         {
             var person = _context.People.Find(id);
