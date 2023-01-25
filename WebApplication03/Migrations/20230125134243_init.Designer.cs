@@ -12,8 +12,8 @@ using WebApplication03.Data;
 namespace WebApplication03.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221206085344_identity")]
-    partial class identity
+    [Migration("20230125134243_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,13 +37,6 @@ namespace WebApplication03.Migrations
                     b.HasIndex("PeopleId");
 
                     b.ToTable("LanguagePerson");
-
-                    b.HasData(
-                        new
-                        {
-                            LanguagesId = "006971a6-37b1-42c8-b930-03df0ef8dc25",
-                            PeopleId = "5d98aa9a-d128-4701-b307-d8084c2282d0"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -236,6 +229,9 @@ namespace WebApplication03.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PicPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Register")
                         .HasColumnType("datetime2");
 
@@ -286,29 +282,6 @@ namespace WebApplication03.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Cities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "89be939e-3d67-47e4-b35b-81aee71653df",
-                            Name = "GBG",
-                            PostNumber = "415 52",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9657)
-                        },
-                        new
-                        {
-                            Id = "f8ae0a98-e042-49f7-bcbd-c18cbf7efd70",
-                            Name = "Järpen",
-                            PostNumber = "415 55",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9663)
-                        },
-                        new
-                        {
-                            Id = "2814a72c-7bff-49db-91d4-986eb29ba55b",
-                            Name = "Mörsil",
-                            PostNumber = "415 44",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9667)
-                        });
                 });
 
             modelBuilder.Entity("WebApplication03.Models.Country", b =>
@@ -326,26 +299,6 @@ namespace WebApplication03.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "7ee608b6-b7b0-4c2f-847f-3d636db3f80b",
-                            Name = "Sweden",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9694)
-                        },
-                        new
-                        {
-                            Id = "5bccfdd9-4d1b-4d74-9cd3-0e05edc1d17a",
-                            Name = "Norway",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9699)
-                        },
-                        new
-                        {
-                            Id = "3a6a79f6-a2ca-4396-bc9e-b87a2bc7685a",
-                            Name = "Danmarc",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9703)
-                        });
                 });
 
             modelBuilder.Entity("WebApplication03.Models.Language", b =>
@@ -363,32 +316,6 @@ namespace WebApplication03.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "006971a6-37b1-42c8-b930-03df0ef8dc25",
-                            Name = "Svenska",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(8632)
-                        },
-                        new
-                        {
-                            Id = "6922fc85-4583-460c-8ef9-13630decd90e",
-                            Name = "Svenska",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9575)
-                        },
-                        new
-                        {
-                            Id = "a0ec5cce-3d17-4cde-a837-3eed86a30b9a",
-                            Name = "Persiska",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9586)
-                        },
-                        new
-                        {
-                            Id = "6764cbf0-10fb-4afd-a51f-324095b77613",
-                            Name = "Engleska",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9591)
-                        });
                 });
 
             modelBuilder.Entity("WebApplication03.Models.Person", b =>
@@ -398,6 +325,9 @@ namespace WebApplication03.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
+
+                    b.Property<string>("ChefId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CityId")
                         .HasColumnType("nvarchar(450)");
@@ -410,48 +340,20 @@ namespace WebApplication03.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PicPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Register")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ChefId");
+
                     b.HasIndex("CityId");
 
                     b.ToTable("People");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "5d98aa9a-d128-4701-b307-d8084c2282d0",
-                            Age = 32,
-                            Name = "Ali",
-                            PhoneNumber = "123456",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(8697)
-                        },
-                        new
-                        {
-                            Id = "96f0d0da-0e49-4b46-8bf7-06ecf8bb4309",
-                            Age = 32,
-                            Name = "Ali",
-                            PhoneNumber = "123456",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9608)
-                        },
-                        new
-                        {
-                            Id = "9cdd9411-8f08-4404-b795-f6273b2c6576",
-                            Age = 32,
-                            Name = "Ali 1",
-                            PhoneNumber = "123456",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9625)
-                        },
-                        new
-                        {
-                            Id = "be403573-befb-4374-9cc3-5caef859ec6c",
-                            Age = 32,
-                            Name = "Ali 2",
-                            PhoneNumber = "123456",
-                            Register = new DateTime(2022, 12, 6, 9, 53, 44, 493, DateTimeKind.Local).AddTicks(9636)
-                        });
                 });
 
             modelBuilder.Entity("LanguagePerson", b =>
@@ -531,11 +433,22 @@ namespace WebApplication03.Migrations
 
             modelBuilder.Entity("WebApplication03.Models.Person", b =>
                 {
+                    b.HasOne("WebApplication03.Models.ApplicationUser", "Chef")
+                        .WithMany("Anstallda")
+                        .HasForeignKey("ChefId");
+
                     b.HasOne("WebApplication03.Models.City", "City")
                         .WithMany("People")
                         .HasForeignKey("CityId");
 
+                    b.Navigation("Chef");
+
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("WebApplication03.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Anstallda");
                 });
 
             modelBuilder.Entity("WebApplication03.Models.City", b =>

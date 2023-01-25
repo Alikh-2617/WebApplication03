@@ -13,9 +13,13 @@ namespace WebApplication03.Models
 
         public string PhoneNumber { get; set; }
 
+        public string PicPath { get; set; }
+
         public DateTime Register { get; set; }
 
         public City? City { get; set; }
+
+        public ApplicationUser? Chef { get; set; }
 
         public List<Language> Languages { get; set; } = new List<Language>();
     }

@@ -26,7 +26,7 @@ namespace WebApplication03.Controllers
         public List<Person> GetPeople()
         {
             List<Person> people = new List<Person>();
-            //people = _context.People.Include(x => x.City).Include(y=>y.Languages).Include(j => j.City.Country).ToList();
+            people = _context.People.Include(x => x.City).Include(y => y.Languages).Include(j => j.City.Country).ToList();
             people = _context.People.Include(x => x.City).ToList();
             return people;
         }
@@ -60,7 +60,7 @@ namespace WebApplication03.Controllers
         public IActionResult create(JsonObject person)
         {
             string jsonPerson = person.ToString();
-            React reactObject = JsonConvert.DeserializeObject<React>(jsonPerson);
+            React reactObject = JsonConvert.DeserializeObject<React>(jsonPerson)!;
 
             if(reactObject != null)
             {

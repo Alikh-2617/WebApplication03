@@ -17,8 +17,10 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Build.Framework;
 using Microsoft.Extensions.Logging;
 using WebApplication03.Models;
+using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
 
 namespace WebApplication03.Areas.Identity.Pages.Account             // rader som ändrads 102 ,127 , 139
 {
@@ -106,6 +108,9 @@ namespace WebApplication03.Areas.Identity.Pages.Account             // rader som
             public string EfterName { get; set; }  
             [Required]
             public int Age { get; set; }
+
+            public string PicPath { get; set; }
+
             [Required]
             public DateTime Register { get; set; }
         }
@@ -128,7 +133,9 @@ namespace WebApplication03.Areas.Identity.Pages.Account             // rader som
                 user.Name = Input.Name;
                 user.EfterName = Input.EfterName;
                 user.Age = Input.Age;
+                user.PicPath = Input.PicPath;   
                 user.Register = DateTime.Now;
+                
 
                 // här kan vi ändra vår UserName från Email till Name !! 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);

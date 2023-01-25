@@ -31,7 +31,7 @@ namespace WebApplication03.Data
 
 
             modelBuilder.Entity<Language>().HasData(new Language { Id = languageId.ToString(), Name = "Svenska", Register = DateTime.Now });
-            modelBuilder.Entity<Person>().HasData(new Person { Id = personId.ToString(), Name = "Ali", Age = 32, PhoneNumber = "123456", Register = DateTime.Now });
+            modelBuilder.Entity<Person>().HasData(new Person { Id = personId.ToString(), Name = "Ali", Age = 32, PicPath = " ", PhoneNumber = "123456", Register = DateTime.Now });
 
             modelBuilder.Entity<Person>()
                 .HasMany(x => x.Languages)
@@ -47,9 +47,9 @@ namespace WebApplication03.Data
 
 
             modelBuilder.Entity<Person>().HasData(
-                new Person { Id = Guid.NewGuid().ToString(), Name = "Ali", Age = 32, PhoneNumber = "123456", Register = DateTime.Now },
-                new Person { Id = Guid.NewGuid().ToString(), Name = "Ali 1", Age = 32, PhoneNumber = "123456", Register = DateTime.Now },
-                new Person { Id = Guid.NewGuid().ToString(), Name = "Ali 2", Age = 32, PhoneNumber = "123456", Register = DateTime.Now });
+                new Person { Id = Guid.NewGuid().ToString(), Name = "Ali", Age = 32, PicPath = " ", PhoneNumber = "123456", Register = DateTime.Now },
+                new Person { Id = Guid.NewGuid().ToString(), Name = "Ali 1", Age = 32, PicPath = " ", PhoneNumber = "123456", Register = DateTime.Now },
+                new Person { Id = Guid.NewGuid().ToString(), Name = "Ali 2", Age = 32, PicPath = " ", PhoneNumber = "123456", Register = DateTime.Now });
 
 
             modelBuilder.Entity<City>().HasData(
@@ -98,7 +98,7 @@ namespace WebApplication03.Data
                     EfterName = "Adminson",
                     //Age = 0 ,
                     //Register = DateTime.Now,
-                    PasswordHash = hasher.HashPassword(null , "password")
+                    PasswordHash = hasher.HashPassword(null, "password")
                 });
 
             // lägga Roll till person
