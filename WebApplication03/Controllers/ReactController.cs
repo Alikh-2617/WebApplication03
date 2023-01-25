@@ -27,7 +27,8 @@ namespace WebApplication03.Controllers
         {
             List<Person> people = new List<Person>();
             people = _context.People.Include(x => x.City).Include(y => y.Languages).Include(j => j.City.Country).ToList();
-            people = _context.People.Include(x => x.City).ToList();
+            //people = _context.People.Include(x => x.City).ToList();
+            //people = _context.People.ToList();
             return people;
         }
 
@@ -62,13 +63,14 @@ namespace WebApplication03.Controllers
             string jsonPerson = person.ToString();
             React reactObject = JsonConvert.DeserializeObject<React>(jsonPerson)!;
 
-            if(reactObject != null)
-            {
+            //if(reactObject != null)
+            //{
                 Person personToCreate = new Person();
                 personToCreate.Id = Guid.NewGuid().ToString();
                 personToCreate.Name = reactObject.Name;
                 personToCreate.Age = reactObject.age;
                 personToCreate.PhoneNumber = reactObject.Phonenumber;
+                personToCreate.PicPath = " ";
                 personToCreate.Register = DateTime.Now;
                 string cityId = reactObject.city;
                 var city = _context.Cities.Find(cityId);
@@ -81,10 +83,10 @@ namespace WebApplication03.Controllers
                 }
                 _context.People.Add(personToCreate);
                 _context.SaveChanges();
-                return StatusCode(200);
-            }
+                return StatusCode(202);
+            //}
 
-            return StatusCode(404);
+            //return StatusCode(404);
         }
     }
 }
